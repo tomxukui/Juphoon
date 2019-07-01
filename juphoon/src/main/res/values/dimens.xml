@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    // for doodle
+    <dimen name="doodle_layout_margin_top">0dp</dimen>
+    <dimen name="doodle_layout_margin_right">0dp</dimen>
+
+    <dimen name="color_selector_width">48dp</dimen>
+    <dimen name="color_selector_radius">9dp</dimen>
+    <dimen name="color_palette_radius">11dp</dimen>
+
+    <dimen name="doodle_sticker_size">48dp</dimen>
+    <dimen name="doodle_sticker_padding">8dp</dimen>
+    <dimen name="doodle_sticker_emoji_default_text_size">24sp</dimen>
+    <dimen name="doodle_sticker_emoji_max_text_size">52sp</dimen>
+    <dimen name="doodle_sticker_emoji_max_size">108dp</dimen>
+    <dimen name="doodle_sticker_emoji_min_size">24dp</dimen>
+    <dimen name="doodle_floating_sticker_default_size">96dp</dimen>
+    <dimen name="doodle_floating_sticker_padding">24dp</dimen>
+    <dimen name="sticker_recycler_width">250dp</dimen>
+
+    <dimen name="doodle_sticker_width_cry">220dp</dimen>
+    <dimen name="doodle_sticker_width_tongue">172dp</dimen>
+    <dimen name="doodle_sticker_width_hearteyes">216dp</dimen>
+    <dimen name="doodle_sticker_width_redlips">154dp</dimen>
+    <dimen name="doodle_sticker_width_sunglass">244dp</dimen>
+    <dimen name="doodle_sticker_width_rabbit">260dp</dimen>
+    <dimen name="doodle_sticker_width_cat">224dp</dimen>
+    <dimen name="doodle_sticker_width_pig">260dp</dimen>
+    <dimen name="doodle_sticker_width_dog">260dp</dimen>
+    <dimen name="doodle_sticker_width_grassonhead">124dp</dimen>
+    <dimen name="doodle_sticker_width_superman">322dp</dimen>
+    <dimen name="doodle_sticker_width_purpleman">292dp</dimen>
+    <dimen name="doodle_sticker_width_blackman">208dp</dimen>
+    <dimen name="doodle_sticker_width_armman">272dp</dimen>
+    <dimen name="doodle_sticker_width_greenman">264dp</dimen>
+
+    <dimen name="doodle_sticker_height_cry">140dp</dimen>
+    <dimen name="doodle_sticker_height_tongue">168dp</dimen>
+    <dimen name="doodle_sticker_height_hearteyes">104dp</dimen>
+    <dimen name="doodle_sticker_height_redlips">164dp</dimen>
+    <dimen name="doodle_sticker_height_sunglass">112dp</dimen>
+    <dimen name="doodle_sticker_height_rabbit">420dp</dimen>
+    <dimen name="doodle_sticker_height_cat">304dp</dimen>
+    <dimen name="doodle_sticker_height_pig">204dp</dimen>
+    <dimen name="doodle_sticker_height_dog">312dp</dimen>
+    <dimen name="doodle_sticker_height_grassonhead">90dp</dimen>
+    <dimen name="doodle_sticker_height_superman">266dp</dimen>
+    <dimen name="doodle_sticker_height_purpleman">252dp</dimen>
+    <dimen name="doodle_sticker_height_blackman">266dp</dimen>
+    <dimen name="doodle_sticker_height_armman">290dp</dimen>
+    <dimen name="doodle_sticker_height_greenman">266dp</dimen>
+
+    <!--云设置-->
+    <string name="cloud_setting_key_server">Server</string>
+    <string name="cloud_setting_key_display_name">DisplayName</string>
+    <string name="cloud_setting_key_call_max_num">CallMaxNum</string>
+    <string name="cloud_setting_key_call_audio_conference">CallAudioConference</string>
+    <string name="cloud_setting_key_conference_max_num">ConferenceMaxNum</string>
+
+    <!--会议-->
+    <string name="jc_login_client_success">连接问诊服务成功</string>
+    <string name="jc_login_client_failure">连接问诊服务失败</string>
+    <string name="jc_logout_client_success">退出问诊服务成功</string>
+    <string name="jc_logout_client_failure">退出问诊服务失败</string>
+    <string name="jc_query_channel_success">查询问诊成功</string>
+    <string name="jc_query_channel_failure">查询问诊失败</string>
+    <string name="jc_join_channel_success">进入问诊成功</string>
+    <string name="jc_join_channel_failure">进入问诊失败</string>
+    <string name="jc_leave_channel_success">离开问诊成功</string>
+    <string name="jc_leave_channel_failure">离开问诊失败</string>
+    <string name="jc_stop_channel_success">结束问诊成功</string>
+    <string name="jc_stop_channel_failure">结束问诊失败</string>
+
+</resources>

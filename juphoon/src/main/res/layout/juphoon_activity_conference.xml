@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/frame_scene"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|center_vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_rotateScene"
+                style="@style/juphoon_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="旋转"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btn_switchCamera"
+                style="@style/juphoon_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="切换摄像头"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btn_sendAudio"
+                style="@style/juphoon_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="发送语音" />
+
+            <Button
+                android:id="@+id/btn_sendVideo"
+                style="@style/juphoon_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="发送视频"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btn_playAudio"
+                style="@style/juphoon_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="播放声音" />
+
+            <Button
+                android:id="@+id/btn_speaker"
+                style="@style/juphoon_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="声音外放" />
+
+            <Button
+                android:id="@+id/btn_leaveChannel"
+                style="@style/juphoon_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="离开" />
+
+            <Button
+                android:id="@+id/btn_stopChannel"
+                style="@style/juphoon_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="结束"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btn_back"
+                style="@style/juphoon_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="返回"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</FrameLayout>
