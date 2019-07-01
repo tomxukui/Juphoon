@@ -1,6 +1,7 @@
 package com.juphoon.cloud.ui;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -267,7 +268,14 @@ public class ConferenceActivity extends AppCompatActivity {
                 .setTitle("提示")
                 .setMessage(message)
                 .setCancelable(false)
-                .setPositiveButton("确定", (dialog, which) -> finish())
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+
+                })
                 .create()
                 .show();
     }

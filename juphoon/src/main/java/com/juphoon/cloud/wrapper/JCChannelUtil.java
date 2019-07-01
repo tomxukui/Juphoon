@@ -27,13 +27,20 @@ public class JCChannelUtil {
     /**
      * 设置视角控件
      */
-    public static void setSceneView(ViewGroup parent, List<JCMediaChannelParticipant> participants, List<JCSenceData> senceDatas, int videoSize) {
+    public static void setSceneView(final ViewGroup parent, final List<JCMediaChannelParticipant> participants, final List<JCSenceData> senceDatas, final int videoSize) {
         if (parent == null || participants == null || senceDatas == null) {
             return;
         }
 
         if (parent.getWidth() == 0) {
-            parent.postDelayed(() -> setSceneView(parent, participants, senceDatas, videoSize), 500);
+            parent.postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    setSceneView(parent, participants, senceDatas, videoSize);
+                }
+
+            }, 500);
             return;
         }
 

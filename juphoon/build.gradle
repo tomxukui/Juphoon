@@ -1,4 +1,7 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group = 'com.github.tomxukui'
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -16,32 +19,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
-    android.libraryVariants.all { variant ->
-        def buildType = variant.name
-
-        if (buildType != null) {
-            variant.outputs.all { output ->
-                def suffixName = output.outputFileName
-
-                if (suffixName != null && suffixName.endsWith('.aar')) {
-                    def fileName = "juphoon-v${defaultConfig.versionName}-${buildType}.aar"
-                    output.outputFileName = fileName
-                }
-            }
-        }
-    }
-
-    lintOptions {
-        checkReleaseBuilds false
-        abortOnError false
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
 }
 
 dependencies {

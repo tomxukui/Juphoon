@@ -6,6 +6,8 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 
 import com.juphoon.cloud.JCAccount;
+import com.juphoon.cloud.JCAccountCallback;
+import com.juphoon.cloud.JCAccountItem;
 import com.juphoon.cloud.JCCall;
 import com.juphoon.cloud.JCCallCallback;
 import com.juphoon.cloud.JCCallItem;
@@ -542,9 +544,14 @@ public class JCManager {
     }
 
     private JCAccount initJCAccount() {
-        return JCAccount.create((i, result, list) -> {
-            JCAccountQueryStatusEvent event = new JCAccountQueryStatusEvent(result, list);
-            EventBus.getDefault().post(event);
+        return JCAccount.create(new JCAccountCallback() {
+
+            @Override
+            public void onQueryUserStatusResult(int i, boolean result, List<JCAccountItem> list) {
+                JCAccountQueryStatusEvent event = new JCAccountQueryStatusEvent(result, list);
+                EventBus.getDefault().post(event);
+            }
+
         });
     }
 
