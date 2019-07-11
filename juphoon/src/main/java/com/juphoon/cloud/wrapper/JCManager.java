@@ -107,6 +107,19 @@ public class JCManager {
         call.setConference(PreferenceManager.getDefaultSharedPreferences(context).getBoolean(context.getString(R.string.cloud_setting_key_call_audio_conference), false));
         mediaChannel.setConfig(JCMediaChannel.CONFIG_CAPACITY, PreferenceManager.getDefaultSharedPreferences(context).getString(context.getString(R.string.cloud_setting_key_conference_max_num), ""));
 
+        //指定前置相机
+        List<String> cameras = mediaDevice.getCameras();
+        if (cameras != null) {
+            for (int i = 0; i < cameras.size(); i++) {
+                int type = mediaDevice.getCameraType(i);
+
+                if (type == JCMediaDevice.CAMERA_FRONT) {
+                    mediaDevice.specifyCamera(i);
+                    break;
+                }
+            }
+        }
+
         // 本程序设置为固定方向
         mediaDevice.autoRotate = false;
         return true;

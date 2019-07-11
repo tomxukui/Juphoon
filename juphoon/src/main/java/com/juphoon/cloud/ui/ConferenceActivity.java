@@ -38,9 +38,8 @@ public class ConferenceActivity extends AppCompatActivity {
     private static final String EXTRA_STOP_ENABLED = "EXTRA_STOP_ENABLED";
     private static final String EXTRA_BACKGROUND_RUNNABLE = "EXTRA_BACKGROUND_RUNNABLE";
 
-    private static final int VIDEO_SIZE = JCMediaChannel.PICTURESIZE_LARGE;
-
-    private FrameLayout frame_scene;
+    private FrameLayout frame_myScene;
+    private FrameLayout frame_otherScene;
     private Button btn_rotateScene;
     private Button btn_switchCamera;
     private Button btn_sendAudio;
@@ -50,7 +49,9 @@ public class ConferenceActivity extends AppCompatActivity {
     private Button btn_hangup;
     private Button btn_back;
 
-    private List<JCSenceData> mSenceDatas = new ArrayList<>();
+    private List<JCSenceData> mMySenceDatas = new ArrayList<>();
+    private List<JCSenceData> mOtherSenceDatas = new ArrayList<>();
+
     private int mAngleIndex = 0;//旋转角度计数
     private boolean mStopEnabled = false;//是否有结束问诊的能力
     private boolean mBackgroundRunnable = false;//是否能在后台运行
@@ -73,7 +74,8 @@ public class ConferenceActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        frame_scene = findViewById(R.id.frame_scene);
+        frame_myScene = findViewById(R.id.frame_myScene);
+        frame_otherScene = findViewById(R.id.frame_otherScene);
         btn_rotateScene = findViewById(R.id.btn_rotateScene);
         btn_switchCamera = findViewById(R.id.btn_switchCamera);
         btn_sendAudio = findViewById(R.id.btn_sendAudio);
@@ -197,7 +199,7 @@ public class ConferenceActivity extends AppCompatActivity {
      */
     private void rotateScene() {
         int angle = 90 * ++mAngleIndex % 360;
-        for (JCSenceData senceData : mSenceDatas) {
+        for (JCSenceData senceData : mOtherSenceDatas) {
             if (senceData.getCanvas() != null) {
                 senceData.getCanvas().rotate(angle);
             }
@@ -307,14 +309,41 @@ public class ConferenceActivity extends AppCompatActivity {
         btn_speaker.setSelected(JCManager.getInstance().mediaDevice.isSpeakerOn());
     }
 
+    /**
+     * 设置镜头
+     */
     private void setSceneViews() {
         List<JCMediaChannelParticipant> participants = JCManager.getInstance().mediaChannel.getParticipants();
+        List<JCMediaChannelParticipant> myParticipants = new ArrayList<>();
+        List<JCMediaChannelParticipant> otherParticipants = new ArrayList<>();
 
-        JCChannelUtil.setSceneView(frame_scene, participants, mSenceDatas, VIDEO_SIZE);
+        for (JCMediaChannelParticipant participant : participants) {
+            if (JCChannelUtil.isSelf(participant)) {
+                myParticipants.add(participant);
+
+            } else {
+                otherParticipants.add(participant);
+            }
+        }
+
+        JCChannelUtil.setSceneView(frame_myScene, myParticipants, mMySenceDatas, JCMediaChannel.PICTURESIZE_SMALL, true);
+        JCChannelUtil.setSceneView(frame_otherScene, otherParticipants, mOtherSenceDatas, JCMediaChannel.PICTURESIZE_LARGE, false);
     }
 
+    /**
+     * 更新镜头
+     */
+    private void updateSceneViews() {
+        JCChannelUtil.updateSceneView(mMySenceDatas, JCMediaChannel.PICTURESIZE_SMALL, true);
+        JCChannelUtil.updateSceneView(mOtherSenceDatas, JCMediaChannel.PICTURESIZE_LARGE, false);
+    }
+
+    /**
+     * 释放镜头
+     */
     private void releaseSceneViews() {
-        JCChannelUtil.releaseSceneView(frame_scene, mSenceDatas);
+        JCChannelUtil.releaseSceneView(frame_myScene, mMySenceDatas);
+        JCChannelUtil.releaseSceneView(frame_otherScene, mOtherSenceDatas);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -333,7 +362,7 @@ public class ConferenceActivity extends AppCompatActivity {
             setSceneViews();
 
         } else if (event.getEventType() == JCEvent.EventType.CONFERENCE_PARTP_UPDATE) {
-            JCChannelUtil.updateSceneView(mSenceDatas, VIDEO_SIZE);
+            updateSceneViews();
 
         } else if (event.getEventType() == JCEvent.EventType.CONFERENCE_PROP_CHANGE) {
             setControlBtns();

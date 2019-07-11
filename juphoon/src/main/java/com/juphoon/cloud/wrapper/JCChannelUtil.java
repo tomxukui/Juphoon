@@ -1,6 +1,7 @@
 package com.juphoon.cloud.wrapper;
 
 import android.text.TextUtils;
+import android.view.SurfaceView;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
@@ -27,7 +28,7 @@ public class JCChannelUtil {
     /**
      * 设置视角控件
      */
-    public static void setSceneView(final ViewGroup parent, final List<JCMediaChannelParticipant> participants, final List<JCSenceData> senceDatas, final int videoSize) {
+    public static void setSceneView(final ViewGroup parent, final List<JCMediaChannelParticipant> participants, final List<JCSenceData> senceDatas, final int videoSize, final boolean onTop) {
         if (parent == null || participants == null || senceDatas == null) {
             return;
         }
@@ -37,7 +38,7 @@ public class JCChannelUtil {
 
                 @Override
                 public void run() {
-                    setSceneView(parent, participants, senceDatas, videoSize);
+                    setSceneView(parent, participants, senceDatas, videoSize, onTop);
                 }
 
             }, 500);
@@ -79,13 +80,13 @@ public class JCChannelUtil {
             break;
         }
 
-        updateSceneView(senceDatas, videoSize);
+        updateSceneView(senceDatas, videoSize, onTop);
     }
 
     /**
      * 更新视角控件
      */
-    public static void updateSceneView(List<JCSenceData> senceDatas, int videoSize) {
+    public static void updateSceneView(List<JCSenceData> senceDatas, int videoSize, boolean onTop) {
         if (senceDatas == null) {
             return;
         }
@@ -97,7 +98,11 @@ public class JCChannelUtil {
                         senceData.setCanvas(JCManager.getInstance().mediaDevice.startCameraVideo(JCMediaDevice.RENDER_FULL_CONTENT));
 
                         if (senceData.getCanvas() != null) {
-                            senceData.getView().addView(senceData.getCanvas().getVideoView(), 0);
+                            SurfaceView surfaceView = senceData.getCanvas().getVideoView();
+                            if (surfaceView != null) {
+                                surfaceView.setZOrderOnTop(onTop);
+                            }
+                            senceData.getView().addView(surfaceView, 0);
                         }
                     }
                 }
@@ -107,7 +112,11 @@ public class JCChannelUtil {
                     if (senceData.getCanvas() == null) {
                         JCManager.getInstance().mediaChannel.requestVideo(senceData.getParticipant(), videoSize);
                         senceData.setCanvas(JCManager.getInstance().mediaDevice.startVideo(senceData.getParticipant().getRenderId(), JCMediaDevice.RENDER_FULL_CONTENT));
-                        senceData.getView().addView(senceData.getCanvas().getVideoView(), 0);
+                        SurfaceView surfaceView = senceData.getCanvas().getVideoView();
+                        if (surfaceView != null) {
+                            surfaceView.setZOrderOnTop(onTop);
+                        }
+                        senceData.getView().addView(surfaceView, 0);
                     }
                 }
             }
