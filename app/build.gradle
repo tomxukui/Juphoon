@@ -28,7 +28,6 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation rootProject.ext.dependencies["appcompat-v7"]
-    implementation rootProject.ext.dependencies["recyclerview-v7"]
     implementation project(":juphoon")
     implementation 'org.greenrobot:eventbus:3.1.1'
 
