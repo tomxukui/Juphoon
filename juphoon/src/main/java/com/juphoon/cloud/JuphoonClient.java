@@ -13,8 +13,7 @@ import static android.content.Context.ACTIVITY_SERVICE;
 
 public class JuphoonClient {
 
-    private Application mContext;
-
+    private Application mApplication;
     private int mFrontActivityCount;
 
     private JuphoonClient() {
@@ -28,17 +27,17 @@ public class JuphoonClient {
         private static final JuphoonClient INSTANCE = new JuphoonClient();
     }
 
-    public void init(Application context, String appKey) {
-        mContext = context;
+    public void init(Application application, String appKey) {
+        mApplication = application;
 
-        String processName = getCurProcessName(context);
-        String packname = context.getPackageName();
+        String processName = getCurProcessName(application);
+        String packname = application.getPackageName();
 
         if (TextUtils.equals(processName, packname)) {
-            JCManager.getInstance().init(context, appKey);
+            JCManager.getInstance().init(application, appKey);
             mFrontActivityCount = 0;
 
-            context.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
+            application.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
 
                 @Override
                 public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
@@ -82,7 +81,7 @@ public class JuphoonClient {
     }
 
     public Context getContext() {
-        return mContext;
+        return mApplication.getApplicationContext();
     }
 
     private String getCurProcessName(Context context) {
