@@ -65,27 +65,18 @@
                 android:text="声音外放" />
 
             <Button
-                android:id="@+id/btn_leaveChannel"
+                android:id="@+id/btn_hangup"
                 style="@style/juphoon_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="离开" />
-
-            <Button
-                android:id="@+id/btn_stopChannel"
-                style="@style/juphoon_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="结束"
-                android:visibility="gone" />
+                android:text="挂断" />
 
             <Button
                 android:id="@+id/btn_back"
                 style="@style/juphoon_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="返回"
-                android:visibility="gone" />
+                android:text="返回" />
 
         </LinearLayout>
 

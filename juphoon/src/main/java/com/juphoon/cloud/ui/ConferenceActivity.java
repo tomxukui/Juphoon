@@ -2,6 +2,7 @@ package com.juphoon.cloud.ui;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -34,6 +35,9 @@ import java.util.List;
  */
 public class ConferenceActivity extends AppCompatActivity {
 
+    private static final String EXTRA_STOP_ENABLED = "EXTRA_STOP_ENABLED";
+    private static final String EXTRA_BACKGROUND_RUNNABLE = "EXTRA_BACKGROUND_RUNNABLE";
+
     private static final int VIDEO_SIZE = JCMediaChannel.PICTURESIZE_LARGE;
 
     private FrameLayout frame_scene;
@@ -43,22 +47,29 @@ public class ConferenceActivity extends AppCompatActivity {
     private Button btn_sendVideo;
     private Button btn_playAudio;
     private Button btn_speaker;
-    private Button btn_leaveChannel;
-    private Button btn_stopChannel;
+    private Button btn_hangup;
     private Button btn_back;
 
     private List<JCSenceData> mSenceDatas = new ArrayList<>();
     private int mAngleIndex = 0;//旋转角度计数
+    private boolean mStopEnabled = false;//是否有结束问诊的能力
+    private boolean mBackgroundRunnable = false;//是否能在后台运行
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.juphoon_activity_conference);
+        initData();
         initView();
         setView();
 
         EventBus.getDefault().register(this);
         checkChannel();
+    }
+
+    private void initData() {
+        mStopEnabled = getIntent().getBooleanExtra(EXTRA_STOP_ENABLED, false);
+        mBackgroundRunnable = getIntent().getBooleanExtra(EXTRA_BACKGROUND_RUNNABLE, false);
     }
 
     private void initView() {
@@ -69,8 +80,7 @@ public class ConferenceActivity extends AppCompatActivity {
         btn_sendVideo = findViewById(R.id.btn_sendVideo);
         btn_playAudio = findViewById(R.id.btn_playAudio);
         btn_speaker = findViewById(R.id.btn_speaker);
-        btn_leaveChannel = findViewById(R.id.btn_leaveChannel);
-        btn_stopChannel = findViewById(R.id.btn_stopChannel);
+        btn_hangup = findViewById(R.id.btn_hangup);
         btn_back = findViewById(R.id.btn_back);
     }
 
@@ -117,31 +127,30 @@ public class ConferenceActivity extends AppCompatActivity {
             }
         });
 
-        btn_leaveChannel.setOnClickListener(new View.OnClickListener() {
+        btn_hangup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                leaveChannel();
+                hangup();
             }
         });
 
-        btn_stopChannel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                stopChannel();
-            }
-        });
-
+        btn_back.setVisibility(mBackgroundRunnable ? View.VISIBLE : View.GONE);
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                backPage();
+                finish();
             }
         });
     }
 
     @Override
     public void onBackPressed() {
-        leaveChannel();
+        if (mBackgroundRunnable) {
+            super.onBackPressed();
+
+        } else {
+            hangup();
+        }
     }
 
     @Override
@@ -195,6 +204,9 @@ public class ConferenceActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * 开放扬声器
+     */
     private void enableSpeaker() {
         JCManager.getInstance().mediaDevice.enableSpeaker(!JCManager.getInstance().mediaDevice.isSpeakerOn());
         setControlBtns();
@@ -229,6 +241,18 @@ public class ConferenceActivity extends AppCompatActivity {
     }
 
     /**
+     * 挂断
+     */
+    private void hangup() {
+        if (mStopEnabled) {
+            stopChannel();
+
+        } else {
+            leaveChannel();
+        }
+    }
+
+    /**
      * 离开
      */
     private void leaveChannel() {
@@ -240,13 +264,6 @@ public class ConferenceActivity extends AppCompatActivity {
      */
     private void stopChannel() {
         JCManager.getInstance().mediaChannel.stop();
-    }
-
-    /**
-     * 返回页面
-     */
-    private void backPage() {
-        finish();
     }
 
     /**
@@ -324,6 +341,20 @@ public class ConferenceActivity extends AppCompatActivity {
         } else if (event.getEventType() == JCEvent.EventType.CONFERENCE_LEAVE) {
             finish();
         }
+    }
+
+    /**
+     * 创建Intent
+     *
+     * @param context            上下文
+     * @param stopEnabled        是否有结束问诊的能力
+     * @param backgroundRunnable 是否能在后台运行
+     */
+    public static Intent buildIntent(Context context, boolean stopEnabled, boolean backgroundRunnable) {
+        Intent intent = new Intent(context, ConferenceActivity.class);
+        intent.putExtra(EXTRA_STOP_ENABLED, stopEnabled);
+        intent.putExtra(EXTRA_BACKGROUND_RUNNABLE, backgroundRunnable);
+        return intent;
     }
 
 }
