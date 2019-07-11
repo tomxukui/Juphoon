@@ -28,5 +28,11 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation rootProject.ext.dependencies["appcompat-v7"]
+    implementation rootProject.ext.dependencies["recyclerview-v7"]
     implementation project(":juphoon")
+    implementation 'org.greenrobot:eventbus:3.1.1'
+
+    /***********************************权限*******************************************/
+    //权限管理(https://github.com/yanzhenjie/AndPermission)
+    implementation 'com.yanzhenjie:permission:2.0.0-rc12'
 }

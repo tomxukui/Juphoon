@@ -1,7 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/et_userid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入账号用户名"
+                android:singleLine="true"
+                android:text="q1"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/et_pwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入账号密码"
+                android:singleLine="true"
+                android:text="123456"
+                android:textSize="13sp" />
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="登录菊风云" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/et_channelId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入会议频道号码"
+                android:singleLine="true"
+                android:text="test" />
+
+            <EditText
+                android:id="@+id/et_channelPwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入会议频道密码"
+                android:singleLine="true"
+                android:text="123456" />
+
+            <Button
+                android:id="@+id/btn_joinChannel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="加入问诊" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_login_join"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="登录并加入问诊" />
+
+            <Button
+                android:id="@+id/btn_stopChannel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="结束问诊" />
+
+            <Button
+                android:id="@+id/btn_logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="退出账号" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
