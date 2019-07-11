@@ -21,8 +21,7 @@
                 android:layout_height="wrap_content"
                 android:hint="请输入账号用户名"
                 android:singleLine="true"
-                android:text="q1"
-                android:textSize="13sp" />
+                android:text="tom1" />
 
             <EditText
                 android:id="@+id/et_pwd"
@@ -30,8 +29,7 @@
                 android:layout_height="wrap_content"
                 android:hint="请输入账号密码"
                 android:singleLine="true"
-                android:text="123456"
-                android:textSize="13sp" />
+                android:text="123456" />
 
             <Button
                 android:id="@+id/btn_login"
@@ -53,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:hint="请输入会议频道号码"
                 android:singleLine="true"
-                android:text="test" />
+                android:text="xukui_room" />
 
             <EditText
                 android:id="@+id/et_channelPwd"
