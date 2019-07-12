@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
             public void onSuccess(String message) {
                 dialog.dismiss();
 
-                Intent intent = new Intent(MainActivity.this, ConferenceActivity.class);
+                Intent intent = ConferenceActivity.buildIntent(MainActivity.this, true, true);
                 startActivity(intent);
             }
 
@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onSuccess(String message) {
                         dialog.dismiss();
 
-                        Intent intent = new Intent(MainActivity.this, ConferenceActivity.class);
+                        Intent intent = ConferenceActivity.buildIntent(MainActivity.this, true, true);
                         startActivity(intent);
                     }
 
