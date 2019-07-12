@@ -532,7 +532,7 @@ public class JCManager {
             @Override
             public void onCreateGroup(int operationId, boolean result, int reason, JCGroupItem groupItem) {
                 if (!result) {
-                    ToastUtil.show("创建群失败");
+                    ToastUtil.showShort("创建群失败");
                 }
             }
 
